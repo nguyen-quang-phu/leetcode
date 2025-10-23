@@ -2,26 +2,20 @@ package leetcode
 
 // @leet start
 func isSubsequence(s string, t string) bool {
-	index := 0
-	n := len(t)
-	m := len(s)
-	if m == 0 {
-		return true
-	}
+	sLen, tLen := len(s), len(t)
+	s_index := 0
 
-	for i := 0; i < n; i++ {
-		if index < m && s[index] == t[i] {
-			index++
+	for i := 0; i < tLen; i++ {
+		if s_index == sLen {
+			break
 		}
-
-		if index == m {
-			return true
+		if t[i] == s[s_index] {
+			s_index++
 		}
 	}
 
-	return false
+	return s_index == sLen
 }
-
 // @leet end
 
 // Keynold

@@ -1,25 +1,27 @@
 package leetcode
 
+import "sort"
+
 // @leet start
-func isValidTriangleNumber(nums []int) bool {
-	if len(nums) != 3 {
-		return false
-	}
-
-	if nums[0]+nums[1] > nums[2] && nums[1]+nums[2] > nums[0] && nums[0]+nums[2] > nums[1] {
-		return true
-	}
-
-	return false
-}
 func triangleNumber(nums []int) int {
-	hash := make(map[int]int)
+	sort.Ints(nums)
 
-	for _, num := range nums {
-		hash[num]++
+	totalTriangles := 0
+
+	for longest := len(nums) - 1; longest >= 2; longest-- {
+		left, right := 0, longest-1
+
+		for left < right {
+			if nums[left] + nums[right] > nums[longest] {
+				totalTriangles += (right - left)
+				right--
+			} else {
+				left++
+			}
+		}
 	}
 
-
+	return totalTriangles
 }
 // @leet end
 
