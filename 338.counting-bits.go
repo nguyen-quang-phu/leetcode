@@ -2,18 +2,21 @@ package leetcode
 
 // @leet start
 func countBits(n int) []int {
-	dp := make([]int, n+1)
+	result := make([]int, n+1)
 
 	for i := 1; i <= n; i++ {
-		if i%2 == 1 {
-			dp[i] = dp[i-1] + 1
+		if i & (i-1) == 0 {
+			result[i] = 1
 		} else {
-			dp[i] = dp[i/2]
+			if i%2==0 {
+				result[i] = result[i/2]
+			} else {
+				result[i] = result[i/2] + 1
+			}
 		}
 	}
-	return dp
+	return result
 }
-
 // @leet end
 
 // Keynold
